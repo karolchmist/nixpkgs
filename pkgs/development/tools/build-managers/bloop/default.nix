@@ -2,7 +2,7 @@
 
 let
   baseName = "bloop";
-  version = "1.3.4";
+  version = "1.4.0-RC1-76-1488031d";
   nailgunCommit = "d7ed5db"; # Fetched from https://github.com/scalacenter/bloop/releases/download/v${version}/install.py
 
   client = stdenv.mkDerivation {
@@ -33,7 +33,7 @@ let
     '';
     outputHashMode = "recursive";
     outputHashAlgo = "sha256";
-    outputHash     = "1z33ip6hgfwiixm2gimz819p5cnxn1fmxb3ryyf77jzwsx7py718";
+    outputHash     = "1k5xd930h4509i4q980rv05a1c0wvcp5ymwzisyrzz673ycglf2w";
   };
 
   zsh = stdenv.mkDerivation {
