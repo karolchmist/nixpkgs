@@ -27348,6 +27348,9 @@ in
   cuyo = callPackage ../games/cuyo { };
 
   devilutionx = callPackage ../games/devilutionx {};
+  
+  opendiablo2 = callPackage ../games/opendiablo2 {};
+  fheroes2 = callPackage ../games/fheroes2 {};
 
   dhewm3 = callPackage ../games/dhewm3 {};
 
