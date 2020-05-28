@@ -1,28 +1,7 @@
 { stdenv, fetchFromGitHub, fetchurl,
-#SDL, SDL_image, SDL_mixer, SDL_ttf, 
 SDL2, SDL2_image, SDL2_mixer, SDL2_ttf, 
 gettext, libpng, unzip, zlib }:
 
-let 
-  fheroes2-demo = stdenv.mkDerivation {
-    name = "fheroes2-demo";
-      
-    src = fetchurl {
-        url = "https://archive.org/download/HeroesofMightandMagicIITheSuccessionWars_1020/h2demo.zip";
-        sha256 = "0g0f4ha5bzx4g4dxqqmpfxg9fh33mwx838rljpk82p470f5qq10j";
-    };
-    
-    buildInputs = [ unzip ];
-    
-    phases = [ "unpackPhase" ];
-    
-    unpackPhase = ''
-        echo src:$src
-        echo out:$out
-        unzip $src -d $out
-    '';
-  };
-in 
 stdenv.mkDerivation rec {
   version = "0.7";
   pname = "fheroes2";
@@ -35,11 +14,7 @@ stdenv.mkDerivation rec {
     rev = "${version}";
     sha256 = "1rbm9xxs42qvi0nab1smz5zbw9xqkmxikcgbk2j7b5hkg46ypclp";
   };
-#  WITH_SDL2="ON"
-  #buildInputs = [ SDL2 SDL2_image zlib ];
-  buildInputs = [ gettext 
-  # SDL SDL_image SDL_mixer SDL_ttf 
-  SDL2 SDL2_image SDL2_mixer SDL2_ttf 
+  buildInputs = [ gettext SDL2 SDL2_image SDL2_mixer SDL2_ttf 
   libpng zlib ];
 
   preBuild = ''
@@ -47,8 +22,10 @@ stdenv.mkDerivation rec {
     mkdir -p $out
     ls -R $out
     
-    ln -s ${fheroes2-demo}/DATA $out/data/
-    ln -s ${fheroes2-demo}/MAPS $out/maps/
+    mkdir -p ~/.local/share/fheroes/{data,maps}
+    
+    ln -s  ~/.local/share/fheroes/data $out/data
+    ln -s  ~/.local/share/fheroes/maps $out/maps
   '';
   
   installPhase = ''
