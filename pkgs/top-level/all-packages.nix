@@ -24058,6 +24058,8 @@ in
 
   liferea = callPackage ../applications/networking/newsreaders/liferea { };
 
+  lbry-desktop = callPackage ../applications/video/lbry-desktop { };
+  
   lightworks = callPackage ../applications/video/lightworks {
     portaudio = portaudio2014;
   };
