@@ -1,19 +1,25 @@
 { stdenv, fetchFromGitHub, cmake, SDL2, SDL2_mixer, SDL2_ttf, libsodium, pkg-config }:
 stdenv.mkDerivation rec {
-  version = "1.0.1";
+  version = "1.1.0-432fbc8e";
   pname = "devilutionx";
 
   src = fetchFromGitHub {
     owner = "diasurgical";
     repo = "devilutionX";
-    rev = version;
-    sha256 = "1jvjlch9ql5s5jx9g5y5pkc2xn62199qylsmzpqzx1jc3k2vmw5i";
+    rev = "432fbc8ef7b98e567b08e44ce91b198374a5ff01";
+    sha256 = "03w3bgmzwsbycx3fzvn47fsmabl069gw77yn2fqg89wlgaw1yrr9";
   };
 
   NIX_CFLAGS_COMPILE = [
     "-I${SDL2_ttf}/include/SDL2"
     ''-DTTF_FONT_PATH="${placeholder "out"}/share/fonts/truetype/CharisSILB.ttf"''
   ];
+
+  cmakeFlags = [
+    "-DBINARY_RELEASE=ON"
+  ];
+
+  enableParallelBuilding = true;
 
   nativeBuildInputs = [ pkg-config cmake ];
   buildInputs = [ libsodium SDL2 SDL2_mixer SDL2_ttf ];
