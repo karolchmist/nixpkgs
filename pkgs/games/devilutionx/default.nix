@@ -46,6 +46,6 @@ stdenv.mkDerivation rec {
     longDescription = "In order to play this game a copy of diabdat.mpq is required. Place a copy of diabdat.mpq in ~/.local/share/diasurgical/devilution before executing the game.";
     license = licenses.unlicense;
     maintainers = [ maintainers.karolchmist ];
-    platforms = platforms.linux ++ platforms.darwin ++ platforms.windows;
+    platforms = platforms.linux ++ platforms.windows;
   };
 }
