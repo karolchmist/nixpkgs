@@ -34610,6 +34610,8 @@ with pkgs;
 
   sgtpuzzles = callPackage ../games/sgt-puzzles { };
 
+  shadow-of-the-wyrm = callPackage ../games/shadow-of-the-wyrm { };
+
   sgtpuzzles-mobile = callPackage ../games/sgt-puzzles {
     isMobile = true;
   };
