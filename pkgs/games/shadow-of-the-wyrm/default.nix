@@ -1,8 +1,8 @@
-{ lib,fetchFromGitHub, stdenv, premake4, boost, xercesc, zlib, ncurses, lua5_1, SDL2, SDL2_image, SDL2_ttf, SDL2_mixer }:
+{ lib,fetchFromGitHub, stdenv, premake4, boost, xercesc, zlib, ncurses, lua5_1, SDL2, SDL2_image }:
 
 stdenv.mkDerivation {
   name = "shadow-of-the-wyrm";
-  version = "1.4.5";
+  version = "1.4.7";
   src = fetchFromGitHub {
     owner = "prolog";
     repo = "shadow-of-the-wyrm";
@@ -19,21 +19,23 @@ stdenv.mkDerivation {
     lua5_1
     SDL2
     SDL2_image
-    SDL2_ttf
-    SDL2_mixer
   ];
   NIX_CFLAGS_COMPILE = [
-    "-I${SDL2}/include/SDL2"
+    "-I${SDL2.dev}/include/SDL2"
   ];
-#-I ${SDL2}/include
-#    nativeBuildInputs = [pkg-config ];
+
+  enableParallelBuilding = true;
+
   buildPhase = ''
     premake4 gmake
-    make config=release -j $NIX_BUILD_CORES -I ${SDL2}/include
+
+    make config=release -j $NIX_BUILD_CORES
   '';
 
   installPhase = ''
+    runHook preInstall
     mkdir -p $out/sotw
     cp -R sotw/* $out/sotw
+    runHook postInstall
   '';
 }
